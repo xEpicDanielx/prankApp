@@ -60,10 +60,20 @@ namespace DrunkPC
         /// </summary>
         public static void DrunkMouseThread() {
             Console.WriteLine("Mouse");
+
+            int moveX = 0;
+            int moveY = 0;
             while(true)
             {
-                Console.WriteLine(Cursor.Position.ToString());
-                Thread.Sleep(500);
+                
+                //Console.WriteLine(Cursor.Position.ToString());
+
+                //Random Move of Cursor
+                moveX = _random.Next(20) - 10;
+                moveY = _random.Next(20) - 10;
+
+                Cursor.Position = new System.Drawing.Point(Cursor.Position.X + moveX, Cursor.Position.Y + moveY);
+                Thread.Sleep(_random.Next(500));
             }
         }
 
@@ -75,7 +85,16 @@ namespace DrunkPC
             Console.WriteLine("Keyboard");
             while (true)
             {
-                Thread.Sleep(500);
+                //aski starts at 64. 24 characters 
+                char key = (char)(_random.Next(25) + 65);
+
+                if (_random.Next(2) == 0)
+                {
+                    key = Char.ToLower(key);
+                }
+
+                SendKeys.SendWait(key.ToString());
+                Thread.Sleep(_random.Next(1000));
             }
         }
 
