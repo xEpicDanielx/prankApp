@@ -9,7 +9,7 @@ namespace DrunkPC
     class Program
     {
         /// <summary>
-        /// Entry Point For Prank Aapp
+        /// Entry Point For Prank App
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
