@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Threading;
-
+using System.Windows.Forms;
+using System.Drawing;
 /// <summary>
 /// Drunk PC 
 /// 
@@ -32,34 +33,75 @@ namespace DrunkPC
         {
             Console.WriteLine("DRUNK PC");
 
-            Thread sampleThread1 = new Thread(new ThreadStart(SampleThread1));
-            sampleThread1.Start();
+            //Creating All Threads
+            Thread drunkMouseThread = new Thread(new ThreadStart(DrunkMouseThread));
+            Thread drunkKeyboardThread = new Thread(new ThreadStart(DrunkKeyboardThread));
+            Thread drunkSoundThread = new Thread(new ThreadStart(DrunkSoundThread));
+            Thread drunkPopupThread = new Thread(new ThreadStart(DrunkPopupThread));
 
-            Thread sampleThread2 = new Thread(new ThreadStart(SampleThread2));
-            sampleThread2.Start();
+            //Start Thread
+            drunkMouseThread.Start();
+            drunkKeyboardThread.Start();
+            drunkSoundThread.Start();
+            drunkPopupThread.Start();
 
-            Console.ReadKey();
-            sampleThread1.Abort();
-            sampleThread2.Abort();
+            //Kill
+            Console.Read();
+            drunkMouseThread.Abort();
+            drunkKeyboardThread.Abort();
+            drunkSoundThread.Abort();
+            drunkPopupThread.Abort();
 
         }
+
+        #region Thread Functions
         /// <summary>
-        /// This is a sample thread
+        /// Mouse Movements
         /// </summary>
-        static void SampleThread1() {
-            while (true) {
-                Console.WriteLine("HELLO THREAD!");
-                Thread.Sleep(1000);
+        public static void DrunkMouseThread() {
+            Console.WriteLine("Mouse");
+            while(true)
+            {
+                Console.WriteLine(Cursor.Position.ToString());
+                Thread.Sleep(500);
             }
         }
 
-        static void SampleThread2()
+        /// <summary>
+        /// Random keyboard outpit
+        /// </summary>
+        public static void DrunkKeyboardThread()
         {
+            Console.WriteLine("Keyboard");
             while (true)
             {
-                Console.WriteLine("HELLO THREAD2!");
-                Thread.Sleep(2000);
+                Thread.Sleep(500);
             }
         }
+
+        /// <summary>
+        /// Random Sound
+        /// </summary>
+        public static void DrunkSoundThread()
+        {
+            Console.WriteLine("Sound");
+            while (true)
+            {
+                Thread.Sleep(500);
+            }
+        }
+
+        /// <summary>
+        /// PopupTread
+        /// </summary>
+        public static void DrunkPopupThread()
+        {
+            Console.WriteLine("Popup");
+            while (true)
+            {
+                Thread.Sleep(500);
+            }
+        }
+        #endregion
     }
 }
